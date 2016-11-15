@@ -49,9 +49,7 @@
      - Falling-edge detection (5->0V): CS12 = CS11 = 1, CS10 = 0; or
      - Rising-edge detection (0->5V): CS12 = CS11 = CS10 = 1
 
-     When TCNT1 reaches a value of 125 (=1/4 turn on the motor for a 500 count encoder) an if-statement causes the LED on the Arduino to flash and we reset TCNT1 to 0.
-
-     Note that this implementation avoids using an interrupt service routine (ISR) -> see equivalent example for interrupt version
+     When TCNT1 reaches a value of 125 (=1/4 turn on the motor for a 500 count encoder) the interrupt service routine (ISR) is called and TCNT1 is reset to zero
 */
 
 void setup() {
