@@ -8,6 +8,9 @@ Pin Change Interrupt Example
 James H. Bannock, 2017
 Norges teknisk-naturvitenskapelige universitet (NTNU)
 
+In this example a message is written to the serial port each time a state change
+on a button is detected (rising- and falling-edge detection).
+
 Notes:
   - A button is attached to Pin 9 and GND
   - INPUT_PULLUP is used to pin the voltage of the input to 5V while the Button
