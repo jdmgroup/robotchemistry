@@ -46,7 +46,7 @@ void setupTimer() {
   TCCR1A = 0; // reset timer/counter control register A for Timer1
   TCCR1B = 0; // reset timer/counter control register B for Timer1
 
-  TCNT1 = TIMER_PRELOAD; // timer/counter
+  TCNT1 = TIMER_PRELOAD; // preload Timer Counter 1
   TCCR1B |= (1 << CS12); // clock select (Timer1, bit2 -> 1/256 prescale)
   TIMSK1 |= (1 << TOIE1); // enable the timer overflow interrupt (TOIE1) in the
                           // timer interrupt mask for Timer1 (TIMSK1)
