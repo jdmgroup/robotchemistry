@@ -23,30 +23,37 @@ Notes:
 */
 
 void setup() {
-  pinMode(13, OUTPUT);
-  setupTimer();
+  pinMode(13, OUTPUT); // enable the LED pin as output
+  setupTimer(); // abstract timer setup
 }
 
-ISR(TIMER1_COMPA_vect) {
-  digitalWrite(13, HIGH);
+ISR(TIMER1_COMPA_vect) { // ISR for Timer 1 Output Compare Register A (OCR1A)
+  digitalWrite(13, HIGH); // turn on the LED
 }
 
-ISR(TIMER1_COMPB_vect) {
-  digitalWrite(13, LOW);
-  TCNT1 = 0; //
+ISR(TIMER1_COMPB_vect) { // ISR for Timer 1 Output Compare Register B (OCR1B)
+  digitalWrite(13, LOW); // turn off the LED
+  TCNT1 = 0; // must manually reset the Timer Counter to zero as CTC mode is disabled
 }
 
-void loop() {}
+void loop() {} // leave blank
 
 void setupTimer() {
-  noInterrupts();
-  TCCR1A = 0;
-  TCCR1B = 0;
-  OCR1A = 15625;
-  OCR1B = 15625 * 2;
+  noInterrupts(); // turn off interrupts
+  
+  TCCR1A = 0; // reset the Timer/Counter Control Register A for Timer 1
+  TCCR1B = 0; // reset the Timer/Counter Control Register B for Timer 1
+  
+  // enable 1/256 prescaling
   TCCR1B |= (1 << CS10);
   TCCR1B |= (1 << CS12);
+  
+  // enable COMPA and COMPB ISRs
   TIMSK1 |= (1 << OCIE1A);
   TIMSK1 |= (1 << OCIE1B);
-  interrupts();
+  
+  OCR1A = 15625; // set time delay for the COMPA ISR to 1 s
+  OCR1B = 15625 * 2; // set time delay for the COMPB ISR to 2s
+  
+  interrupts(); // turn on interrupts
 }
