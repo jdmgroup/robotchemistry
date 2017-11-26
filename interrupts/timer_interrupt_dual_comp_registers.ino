@@ -44,7 +44,7 @@ void setupTimer() {
   TCCR1A = 0; // reset the Timer/Counter Control Register A for Timer 1
   TCCR1B = 0; // reset the Timer/Counter Control Register B for Timer 1
   
-  // enable 1/256 prescaling
+  // enable 1/1024 prescaling
   TCCR1B |= (1 << CS10);
   TCCR1B |= (1 << CS12);
   
